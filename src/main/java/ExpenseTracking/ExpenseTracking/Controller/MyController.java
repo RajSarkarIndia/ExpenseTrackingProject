@@ -116,7 +116,7 @@ public class MyController {
 	public ModelAndView listMyExpenses(Model model, Principal principal) {
 		ModelAndView mav = new ModelAndView();
 		String username = principal.getName();
-		Optional<User> user = UserRepository.findByUsername(username);
+		Optional<User> user = UserRepository.findByEmail(username);
 		User userdetails = user.get();
 		String company = userdetails.getCompany();
 		mav.addObject("expenses", expensesRepository.findAllByUsername(username));
@@ -137,7 +137,7 @@ public class MyController {
 		expenses.setUsername(username);
 		expenses.setStatus("Submitted");
 
-		Optional<User> user = UserRepository.findByUsername(username);
+		Optional<User> user = UserRepository.findByEmail(username);
 		User userdetails = user.get();
 		String company = userdetails.getCompany();
 		expenses.setCompany(company);
@@ -151,7 +151,7 @@ public class MyController {
 	public ModelAndView expenseshome(Principal principal) {
 		ModelAndView mav = new ModelAndView();
 		String username = principal.getName();
-		Optional<User> user = UserRepository.findByUsername(username);
+		Optional<User> user = UserRepository.findByEmail(username);
 		User userdetails = user.get();
 		String company = userdetails.getCompany();
 		// addObject of list for:- select row where status = submitted and approve or
